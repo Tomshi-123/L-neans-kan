@@ -1,7 +1,13 @@
 /* Styling för hela body-elementet */
 body {
   height: 100vh; /* Full skärmhöjd */
-  background: linear-gradient(45deg, #6a11cb, #2575fc, #00c4b4, #ff6f61); /* Gradientbakgrund */
+  background: linear-gradient(
+    45deg,
+    #6a11cb,
+    #2575fc,
+    #00c4b4,
+    #ff6f61
+  ); /* Gradientbakgrund */
   background-size: 400% 400%; /* Större gradient för animation */
   animation: gradientAnimation 15s ease infinite; /* Animerar gradienten */
   margin: 0; /* Ingen marginal */
@@ -10,9 +16,15 @@ body {
 
 /* Animation för gradientbakgrunden */
 @keyframes gradientAnimation {
-  0% { background-position: 0% 50%; } /* Startposition */
-  50% { background-position: 100% 50%; } /* Mellanposition */
-  100% { background-position: 0% 50%; } /* Slutposition */
+  0% {
+    background-position: 0% 50%;
+  } /* Startposition */
+  50% {
+    background-position: 100% 50%;
+  } /* Mellanposition */
+  100% {
+    background-position: 0% 50%;
+  } /* Slutposition */
 }
 
 /* Styling för root-elementet (React-appens container) */
@@ -39,7 +51,6 @@ body {
   max-height: 700px; /* Maxhöjd för stora skärmar */
   overflow-y: auto; /* Scroll om innehållet är för stort */
   box-sizing: border-box; /* Inkluderar padding/border */
-
 }
 
 /* Styling för rubriken */
@@ -189,8 +200,12 @@ h2 {
 }
 
 @keyframes logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @media (prefers-reduced-motion: no-preference) {

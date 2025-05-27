@@ -8,7 +8,6 @@ import * as yup from "yup";
 
 import { loanSchema } from "./loanValidationSchema";
 
-
 const LoanForm = () => {
   const [formData, setFormData] = useState({
     name: "",
