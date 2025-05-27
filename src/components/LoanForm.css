@@ -1,0 +1,208 @@
+/* Styling för hela body-elementet */
+body {
+  height: 100vh; /* Full skärmhöjd */
+  background: linear-gradient(45deg, #6a11cb, #2575fc, #00c4b4, #ff6f61); /* Gradientbakgrund */
+  background-size: 400% 400%; /* Större gradient för animation */
+  animation: gradientAnimation 15s ease infinite; /* Animerar gradienten */
+  margin: 0; /* Ingen marginal */
+  overflow: hidden; /* Förhindrar body-scroll */
+}
+
+/* Animation för gradientbakgrunden */
+@keyframes gradientAnimation {
+  0% { background-position: 0% 50%; } /* Startposition */
+  50% { background-position: 100% 50%; } /* Mellanposition */
+  100% { background-position: 0% 50%; } /* Slutposition */
+}
+
+/* Styling för root-elementet (React-appens container) */
+#root {
+  height: 100vh; /* Full skärmhöjd */
+  display: flex; /* Flexbox för centrering */
+  justify-content: center; /* Centrera horisontellt */
+  align-items: center; /* Centrera vertikalt */
+  margin: 0; /* Ingen marginal */
+  padding: 0; /* Ingen padding */
+  box-sizing: border-box; /* Inkluderar padding/border i storlek */
+}
+
+/* Styling för formulärcontainern */
+.form-container {
+  width: min(700px, 60vw); /* Max 700px eller 60% av skärmens bredd */
+  max-width: 100%; /* Förhindrar overflow */
+  min-width: 300px; /* Minsta bredd för läsbarhet */
+  background: rgb(255, 255, 255); /* Halvtransparent bakgrund */
+  backdrop-filter: blur(10px); /* Suddig effekt */
+  border: 1px solid rgba(255, 255, 255, 0.3); /* Ljus kant */
+  border-radius: 8px; /* Rundade hörn */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Lätt skugga */
+  max-height: 700px; /* Maxhöjd för stora skärmar */
+  overflow-y: auto; /* Scroll om innehållet är för stort */
+  box-sizing: border-box; /* Inkluderar padding/border */
+
+}
+
+/* Styling för rubriken */
+h2 {
+  border-radius: 40px;
+  font-size: 1.75rem; /* Storlek för stora skärmar */
+  margin-bottom: 1rem; /* Avstånd under */
+  color: #ffffff; /* Vit text */
+  text-align: center; /* Centrerad */
+  position: sticky; /* Klistrig vid scroll */
+  top: 0; /* Fäster högst upp */
+  background: rgb(64, 146, 194); /* Subtil bakgrund */
+  padding: 0.5rem 0; /* Padding för rubriken */
+  z-index: 1; /* Över annat innehåll */
+}
+
+/* Anpassar Bootstrap inputfält */
+.form-control,
+.form-select {
+  background: rgba(255, 255, 255, 0.1); /* Halvtransparent bakgrund */
+  border: 1px solid rgba(255, 255, 255, 0.5); /* Ljus kant */
+  color: #ffffff; /* Vit text */
+}
+
+/* Fokus-styling för inputfält */
+.form-control:focus,
+.form-select:focus {
+  background: rgba(255, 255, 255, 0.1); /* Behåller bakgrund vid fokus */
+  border-color: #2575fc; /* Blå kant */
+  box-shadow: 0 0 5px rgba(37, 117, 252, 0.5); /* Lätt skugga */
+}
+
+/* Styling för etiketter */
+.form-label {
+  color: #ffffff; /* Vit text */
+  font-weight: 500; /* Något fetare text */
+}
+
+/* Styling för felmeddelanden */
+.text-danger {
+  font-size: 0.8rem; /* Mindre textstorlek */
+  margin-top: 0.2rem; /* Avstånd ovanför */
+}
+
+/* Styling för primär knapp */
+.btn-primary {
+  background: #6a11cb; /* Lila bakgrund */
+  border: none; /* Ingen kant */
+}
+
+/* Hover för primär knapp */
+.btn-primary:hover {
+  background: #2575fc; /* Blå vid hover */
+}
+
+/* Styling för sekundär knapp */
+.btn-secondary {
+  background: #555; /* Grå bakgrund */
+  border: none; /* Ingen kant */
+}
+
+/* Hover för sekundär knapp */
+.btn-secondary:hover {
+  background: #777; /* Ljusare grå */
+}
+
+/* Scrollbar för WebKit */
+::-webkit-scrollbar {
+  width: 6px; /* Bredd på scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background: transparent; /* Transparent spår */
+  border-radius: 4px; /* Rundade hörn */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #6a11cb; /* Lila handtag */
+  border-radius: 4px; /* Rundade hörn */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #2575fc; /* Blå vid hover */
+}
+
+/* Firefox scrollbar */
+* {
+  scrollbar-width: thin; /* Tunn scrollbar */
+  scrollbar-color: #6a11cb transparent; /* Lila handtag, transparent spår */
+}
+
+/* Responsiva justeringar för små skärmar */
+@media (max-width: 576px) {
+  .form-container {
+    width: 100vw; /* Full skärmbredd */
+    height: 100vh; /* Full skärmhöjd */
+    max-height: none; /* Ingen höjdbegränsning */
+    border-radius: 0; /* Inga rundade hörn */
+    padding: 1rem; /* Mindre padding */
+    margin: 0; /* Ingen marginal */
+  }
+
+  #root {
+    padding: 0; /* Ingen padding */
+  }
+
+  h2 {
+    font-size: 1.5rem; /* Mindre rubrik */
+    padding: 0.75rem 0; /* Justerad padding */
+    margin-bottom: 0.75rem; /* Mindre avstånd */
+  }
+
+  .form-control,
+  .form-select {
+    font-size: 0.85rem; /* Mindre text */
+    padding: 0.4rem; /* Mindre padding */
+  }
+
+  .form-label {
+    font-size: 0.9rem; /* Mindre etikett */
+  }
+
+  .btn {
+    font-size: 0.9rem; /* Mindre knapptext */
+    padding: 0.4rem; /* Mindre knapp-padding */
+  }
+
+  textarea.form-control {
+    height: 70px; /* Mindre textarea */
+  }
+}
+
+/* Behåller oanvända stilar för logo och kort */
+.logo {
+  height: 5em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
