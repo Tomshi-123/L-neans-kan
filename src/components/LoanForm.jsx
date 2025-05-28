@@ -24,6 +24,7 @@ const LoanForm = () => {
   const [errors, setErrors] = useState({});
   const [step, setStep] = useState(1);
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);  // <-- Loading state
 
   useEffect(() => {
     const savedData = localStorage.getItem("loanFormData");
@@ -46,7 +47,6 @@ const LoanForm = () => {
 
   // ---------------------------- Funktion för att validera med yup per steg ----------------------------
   const validateStepWithYup = async (currentStep) => {
-    // Definiera vilka fält som ska valideras per steg med hjälp av "pick" i yup-schema
     let schema;
     if (currentStep === 1) {
       schema = yup.object().shape({
@@ -63,15 +63,14 @@ const LoanForm = () => {
       schema = yup.object().shape({
         loanPurpose: loanSchema.fields.loanPurpose,
         repaymentYears: loanSchema.fields.repaymentYears,
-        comments: loanSchema.fields.comments, // comments kanske inte krävs
+        comments: loanSchema.fields.comments,
       });
     }
 
     try {
       await schema.validate(formData, { abortEarly: false });
-      return {}; // inga fel
+      return {};
     } catch (validationErrors) {
-      // Om det finns valideringsfel, bygg ett felobjekt
       const newErrors = {};
       validationErrors.inner.forEach((err) => {
         newErrors[err.path] = err.message;
@@ -83,9 +82,7 @@ const LoanForm = () => {
 
   const handleNext = async (e) => {
     e.preventDefault();
-    // ---------------------------- Anropa yup-valideringen ----------------------------
     const newErrors = await validateStepWithYup(step);
-    // ----------------------------
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       const errorMessages = Object.values(newErrors).join("\n");
@@ -105,9 +102,8 @@ const LoanForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // ---------------------------- Validera hela sista steget ----------------------------
+
     const newErrors = await validateStepWithYup(step);
-    // ----------------------------
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       const errorMessages = Object.values(newErrors).join("\n");
@@ -115,9 +111,14 @@ const LoanForm = () => {
       return;
     }
     setErrors({});
-    console.log("Ansökan:", formData);
-    localStorage.removeItem("loanFormData");
-    setSubmitted(true);
+    setLoading(true); // STARTA loading
+
+    setTimeout(() => {
+      console.log("Ansökan:", formData);
+      localStorage.removeItem("loanFormData");
+      setLoading(false); // STOPPA loading
+      setSubmitted(true); // Markera som skickad
+    }, 2000);
   };
 
   return (
@@ -302,6 +303,7 @@ const LoanForm = () => {
                       className="btn btn-secondary"
                       onClick={handleBack}
                       aria-label="Gå tillbaka till föregående steg"
+                      disabled={loading}  // disable under loading
                     >
                       Tillbaka
                     </button>
@@ -312,9 +314,12 @@ const LoanForm = () => {
                       className="btn btn-primary ms-auto"
                       onClick={handleNext}
                       aria-label="Gå till nästa steg"
+                      disabled={loading}  // disable under loading
                     >
                       Nästa
                     </button>
+                  ) : loading ? (
+                    <div className="loading-spinner ms-auto">Skickar...</div>
                   ) : (
                     <button
                       type="button"
